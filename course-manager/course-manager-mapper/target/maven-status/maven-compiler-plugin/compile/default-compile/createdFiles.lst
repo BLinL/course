@@ -1,0 +1,13 @@
+com\course\mapper\StudentPrivilegeMapper.class
+com\course\mapper\StudentMapper.class
+com\course\mapper\AdminMapper.class
+com\course\mapper\CourseMapper.class
+com\course\mapper\UserloginMapper.class
+com\course\mapper\TeacherMapper.class
+com\course\mapper\LeavemessageMapper.class
+com\course\mapper\PrivilegeMapper.class
+com\course\mapper\RolPrivMapper.class
+com\course\mapper\StudentRoleMapper.class
+com\course\mapper\RoleMapper.class
+com\course\mapper\NoticeMapper.class
+com\course\mapper\StudentCourseMapper.class
