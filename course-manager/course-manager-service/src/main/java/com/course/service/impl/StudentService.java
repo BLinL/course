@@ -72,6 +72,15 @@ public class StudentService implements IStudentService {
         return false;
     }
 
+    @Override
+    public Student findByUsername(String username) {
+        StudentExample studentExample = new StudentExample();
+        StudentExample.Criteria criteria = studentExample.createCriteria();
+        criteria.andUsernameLike(username);
+        List<Student> student = studentMapper.selectByExample(studentExample);
+        return student == null?null:student.get(0);
+    }
+
 //    public static void main(String[] args) {
 //        String hashAlgorithmName = "MD5";
 //        String password = "123";

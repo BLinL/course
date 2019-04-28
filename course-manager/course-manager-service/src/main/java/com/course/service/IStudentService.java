@@ -10,4 +10,7 @@ public interface IStudentService{
     boolean updateStudent(Student student);
 
     boolean findBySidAndUserName(Student student);
+
+    Student findByUsername(String username);
+
 }

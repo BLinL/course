@@ -12,6 +12,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.Permission;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Controller
@@ -31,7 +33,6 @@ public class LoginController {
     public String login(Userlogin userlogin){
         JSONObject jsonObject = new JSONObject();
 
-//        ModelAndView modelAndView = new ModelAndView();
         System.out.println(userlogin);
         //当前subject
         Subject subject = SecurityUtils.getSubject();//Sbuject的实例通常是DelegatingSubject类
@@ -41,7 +42,6 @@ public class LoginController {
                 //shiro登录
                 UsernamePasswordToken token =new UsernamePasswordToken(
                         userlogin.getUsername(),userlogin.getPassword());
-//            token.setRememberMe(true);
                 subject.login(token);
             }
         }catch (Exception e){
@@ -51,11 +51,8 @@ public class LoginController {
         }
 
 
-//        modelAndView.addObject("currUser",userlogin.getUsername());
-
         if(subject.hasRole("student")){
             System.out.println("您拥有角色 student");
-//            modelAndView.setViewName("index");
             jsonObject.put("url","index");
             return jsonObject.toJSONString();
         }

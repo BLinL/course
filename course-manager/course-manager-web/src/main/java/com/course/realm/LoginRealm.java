@@ -6,13 +6,23 @@ import com.course.pojo.Userlogin;
 import com.course.service.ILoginService;
 import com.course.service.IRoleService;
 import com.course.service.impl.PrivilegeService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.SessionException;
+import org.apache.shiro.session.mgt.DefaultSessionKey;
+import org.apache.shiro.session.mgt.SessionKey;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+
 import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Set;
@@ -109,6 +119,15 @@ public class LoginRealm extends AuthorizingRealm {
               salt,
               realmName
         );
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setTimeout(2400000);//设置超时时间 40min
+        session.setAttribute("username",userlogin.getUsername());
+//        session.setAttribute("userId",userlogin.getUserid());
+//        System.out.println(userlogin.getUserid());
+//        Object aa = session.getAttribute("username");
+//        Object id = session.getId();
+//        System.out.println("id:"+id+",username:"+aa);
         return info;
     }
 

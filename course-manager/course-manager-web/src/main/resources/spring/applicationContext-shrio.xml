@@ -13,6 +13,21 @@
     <!--组件扫描器-->
     <context:component-scan base-package="com.course.realm"/>
 
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.ServletContainerSessionManager">
+        <!--超时时间 40min-->
+
+    </bean>
+
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie">
+            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                <!--设置超时时间 单位 秒，一天=86400-->
+                <constructor-arg value="shiro-cookie"/>
+                <property name="maxAge" value="86400"/>
+            </bean>
+        </property>
+    </bean>
+
     <!--自定义realm-->
     <bean id="loginRealm" class="com.course.realm.LoginRealm">
         <!--将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列-->
@@ -22,6 +37,8 @@
     <!--配置 安全管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="loginRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <!-- 凭证匹配器 -->

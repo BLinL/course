@@ -31,6 +31,7 @@ com\course\pojo\AdminExample$Criteria.class
 com\course\pojo\PrivilegeExample$GeneratedCriteria.class
 com\course\pojo\PrivilegeExample.class
 com\course\pojo\UserloginExample$Criteria.class
+com\course\pojo\StudentCourse1.class
 com\course\pojo\AdminExample$Criterion.class
 com\course\pojo\NoticeExample$GeneratedCriteria.class
 com\course\pojo\RolPrivExample$Criterion.class
