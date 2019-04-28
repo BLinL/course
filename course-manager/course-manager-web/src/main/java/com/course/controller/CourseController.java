@@ -61,7 +61,8 @@ public class CourseController {
         Session session = subject.getSession(false);
         if(session!=null){
             String username = (String)session.getAttribute("username");
-
+            //
+            System.out.println("--------------------courseController"+username);
             if(username!=null){
                 Student stu = studentService.findByUsername(username);
                 Integer sid = stu.getSid();

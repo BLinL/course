@@ -43,7 +43,7 @@ public class LoginRealm extends AuthorizingRealm {
     private PrivilegeService privilegeService;
 
     /**
-     * 权限认证
+     * 授权
      * @param principals
      * @return info
      */
@@ -62,7 +62,7 @@ public class LoginRealm extends AuthorizingRealm {
             Integer roleId = userlogin.getRole();
             if(roleId != null) {
                 role = roleService.findByID(roleId);
-//               privileges =  privilegeService.getByID(roleId);
+//              privileges =  privilegeService.getByID(roleId);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -95,7 +95,9 @@ public class LoginRealm extends AuthorizingRealm {
         //token
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
         String username = userToken.getUsername();
+        String password = new String(userToken.getPassword());
         System.out.println("从UsernamePassword中获取username" + username);
+        System.out.println("从UsernamePassword中获取password" + password);
 //      String password =new String((char[])token.getCredentials());
 
         //从数据库取出用户数据,作为认证实体

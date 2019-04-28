@@ -7,10 +7,7 @@ import com.course.pojo.StudentExample;
 import com.course.pojo.Userlogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -37,26 +34,39 @@ public class LoginController {
         //当前subject
         Subject subject = SecurityUtils.getSubject();//Sbuject的实例通常是DelegatingSubject类
 
-        try {
-            if(!subject.isAuthenticated()){
-                //shiro登录
-                UsernamePasswordToken token =new UsernamePasswordToken(
-                        userlogin.getUsername(),userlogin.getPassword());
-                subject.login(token);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            jsonObject.put("errorInfo","用户不存在或密码错误！请检查后重新输入");
-            return jsonObject.toJSONString();
-        }
 
+        if(!subject.isAuthenticated()){
+            //shiro登录
+            UsernamePasswordToken token =new UsernamePasswordToken(
+                    userlogin.getUsername(),userlogin.getPassword());
+
+            try {
+                subject.login(token);
+            }catch (UnknownAccountException unknownAccountEx){
+                jsonObject.put("errorInfo","未知账户");
+                unknownAccountEx.printStackTrace();
+            }catch(IncorrectCredentialsException wrongPasswordEx){
+                jsonObject.put("errorInfo","密码错误");
+                wrongPasswordEx.printStackTrace();
+            }catch(LockedAccountException lockedAccountEx){
+                jsonObject.put("errorInfo","账户被锁定");
+                lockedAccountEx.printStackTrace();
+            } catch ( AuthenticationException ae ) {
+                jsonObject.put("errorInfo","未知错误,请联系管理员");
+                ae.printStackTrace();
+            }
+
+        }
 
         if(subject.hasRole("student")){
             System.out.println("您拥有角色 student");
-            jsonObject.put("url","index");
-            return jsonObject.toJSONString();
+        }else if(subject.hasRole("teacher")){
+            System.out.println("您拥有角色 teacher");
+        }else if(subject.hasRole("admin")){
+            System.out.println("您拥有角色 admin");
         }
-        jsonObject.put("errorInfo","error");
+
+        jsonObject.put("url","index");
         return jsonObject.toJSONString();
     }
 

@@ -31,6 +31,7 @@ public class PasswordUtil {
                 user.getPassword(),
                 ByteSource.Util.bytes(user.getCredentialsSalt()),
                 hashIterations).toHex();
+        System.out.println("------"+password);
         user.setPassword(password);
     }
 }

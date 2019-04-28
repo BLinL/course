@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: bliu
@@ -21,17 +22,44 @@
 
         <div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
             <%--树形菜单--%>
-            <ul id="tt" class="easyui-tree">
-                <li>
-                    <span>选课管理</span>
-                    <ul>
-                        <li data-options="attributes:{'url':'course_list'}"><span>所有课程</span></li>
-                        <li data-options="attributes:{'url':'select_course'}"><span>我的课程</span></li>
-                    </ul>
-                </li>
-            </ul>
+            <shiro:hasRole name="student">
+                <ul id="tt" class="easyui-tree">
+                    <li>
+                        <span>选课管理</span>
+                        <ul>
+                            <li data-options="attributes:{'url':'course_list'}"><span>所有课程</span></li>
+                            <li data-options="attributes:{'url':'select_course'}"><span>我的课程</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </shiro:hasRole>
 
+            <shiro:hasRole name="teacher">
+                <ul id="tch" class="easyui-tree">
+                    <li>
+                        <span>课程管理</span>
+                        <ul>
+                            <li data-options="attributes:{'url':'course_list'}"><span>添加课程</span></li>
+                            <li data-options="attributes:{'url':'select_course'}"><span>修改课程</span></li>
+                            <li data-options="attributes:{'url':'course_list'}"><span>删除课程</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </shiro:hasRole>
+
+            <shiro:hasRole name="admin">
+                <ul id="adm" class="easyui-tree">
+                    <li>
+                        <span>课程管理</span>
+                        <ul>
+                            <li data-options="attributes:{'url':'course_list'}"><span>课程审核</span></li>
+                            <li data-options="attributes:{'url':'select_course'}"><span>学生管理</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </shiro:hasRole>
         </div>
+
         <div data-options="region:'center'" style="padding:5px;background:#eee;">
             <div id="tb" class="easyui-tabs">
                 <div title="Tab1" style="padding:20px;display:none;">

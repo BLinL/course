@@ -2,11 +2,9 @@ package com.course.service.impl;
 
 import com.course.mapper.CourseMapper;
 import com.course.mapper.StudentCourseMapper;
-import com.course.pojo.Course;
-import com.course.pojo.CourseExample;
-import com.course.pojo.StudentCourse;
-import com.course.pojo.StudentCourseExample;
+import com.course.pojo.*;
 import com.course.service.ICourseService;
+import com.course.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,4 +96,9 @@ public class CourseService implements ICourseService {
         return notSelCourse;
 
     }
+
+//    public static void main(String[] args) {
+//        PasswordUtil passwordUtil = new PasswordUtil();
+//        passwordUtil.encryptPassword(new Userlogin("罗宾","123"));
+//    }
 }

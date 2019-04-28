@@ -18,7 +18,7 @@
     <h2>Context Menu on DataGrid</h2>
     <table class="easyui-datagrid" title="All of course"
            style="width: 80%"
-           data-options="url:'getdata',fitColumns:true,singleSelect:true,method:'get'">
+           data-options="url:'getSelectedCourse',fitColumns:true,singleSelect:true,method:'get'">
 
         <thead>
             <tr>

@@ -1,6 +1,5 @@
 package com.course.pojo;
 
-import jdk.internal.dynalink.linker.LinkerServices;
 
 import java.util.List;
 

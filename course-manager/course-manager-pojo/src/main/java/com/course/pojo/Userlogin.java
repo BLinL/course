@@ -215,6 +215,10 @@ public class Userlogin {
         this.salt = salt == null ? null : salt.trim();
     }
 
+    /**
+     *salt+username 作为盐
+     * @return
+     */
     public String getCredentialsSalt() {
         return username + salt;
     }
