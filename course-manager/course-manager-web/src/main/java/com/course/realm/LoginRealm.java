@@ -125,6 +125,7 @@ public class LoginRealm extends AuthorizingRealm {
         Session session = SecurityUtils.getSubject().getSession();
         session.setTimeout(2400000);//设置超时时间 40min
         session.setAttribute("username",userlogin.getUsername());
+        session.setAttribute("currUser",userlogin);
 //        session.setAttribute("userId",userlogin.getUserid());
 //        System.out.println(userlogin.getUserid());
 //        Object aa = session.getAttribute("username");

@@ -21,7 +21,7 @@
 
 
         <div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
-            <%--树形菜单--%>
+            <%--学生菜单--%>
             <shiro:hasRole name="student">
                 <ul id="tt" class="easyui-tree">
                     <li>
@@ -34,14 +34,15 @@
                 </ul>
             </shiro:hasRole>
 
+
+            <%--教师菜单--%>
             <shiro:hasRole name="teacher">
                 <ul id="tch" class="easyui-tree">
                     <li>
                         <span>课程管理</span>
                         <ul>
-                            <li data-options="attributes:{'url':'course_list'}"><span>添加课程</span></li>
-                            <li data-options="attributes:{'url':'select_course'}"><span>修改课程</span></li>
-                            <li data-options="attributes:{'url':'course_list'}"><span>删除课程</span></li>
+                            <li data-options="attributes:{'url':'course_add'}"><span>课程添加</span></li>
+                            <li data-options="attributes:{'url':'course_add'}"><span>成绩管理</span></li>
                         </ul>
                     </li>
                 </ul>
@@ -60,12 +61,16 @@
             </shiro:hasRole>
         </div>
 
-        <div data-options="region:'center'" style="padding:5px;background:#eee;">
-            <div id="tb" class="easyui-tabs">
+        <div data-options="region:'center'" style="padding:5px;background:#eee">
+            <div id="tb" class="easyui-tabs" style="height: 520px">
                 <div title="Tab1" style="padding:20px;display:none;">
                     首页
                 </div>
             </div>
+
+        </div>
+
+        <div data-options="region:'south',title:'South Title',split:true" style="height:100px;">
 
         </div>
 
@@ -87,18 +92,46 @@
                         }else{
                             // 添加一个新的标签页面板（tab panel）
                             tabs.tabs('add',{
+
+                                fit:true,
+                                border:false,
                                 title:node_text,
                                 content:'Tab Body',
                                 closable:true,
                                 href:node.attributes.url
+
                             });
                         }
                     }
-
-
-
                 }
             });
+
+            $("#tch").tree({
+                onClick:function (node) {
+                   var node_text = node.text;
+
+                   if(node_text === "课程管理") {
+
+                   } else {
+                       var tabs = $("#tb");
+                       var tab = tabs.tabs("getTab",node_text);
+                       if(tab){
+                           tabs.tabs("select",node_text)
+                       }else{
+                           // 添加一个新的标签页面板（tab panel）
+                           tabs.tabs('add',{
+                               title:node_text,
+                               content:'Tab Body',
+                               closable:true,
+                               href:node.attributes.url
+                           });
+                       }
+                   }
+                }
+
+
+
+            })
 
         </script>
 </body>

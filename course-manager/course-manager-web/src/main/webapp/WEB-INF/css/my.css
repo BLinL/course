@@ -1,0 +1,54 @@
+.textOverImage{
+	position: relative;
+	width: 300px;
+	height: 300px;
+	display: inline-block;
+	margin:4px 12px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition:0.5s;
+	
+	border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.08);
+    
+}
+.textOverImage:hover{
+	background-size: 110%;
+}
+.textOverImage:after{
+	position: absolute;
+	top: 90%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.3);
+	color: #fff;
+	transition: 0.5s;
+	padding:0 8px;
+	content: attr(data-text);
+	
+	border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+
+.textOverImage:hover:after{
+	top: 0;
+	opacity: 1;
+	background-color: rgba(0,0,0,0.6);
+	padding: 8px;
+}
+.textOverImage:first-line{
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+body{
+	padding-top:70px;
+	background:ghostwhite;
+	
+}
+

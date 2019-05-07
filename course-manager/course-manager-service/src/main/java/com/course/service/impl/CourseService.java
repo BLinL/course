@@ -1,6 +1,8 @@
 package com.course.service.impl;
 
+import com.common.pojo.EasyUIPagination;
 import com.course.mapper.CourseMapper;
+import com.course.mapper.CourseMapperCustom;
 import com.course.mapper.StudentCourseMapper;
 import com.course.pojo.*;
 import com.course.service.ICourseService;
@@ -11,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CourseService implements ICourseService {
@@ -22,17 +22,42 @@ public class CourseService implements ICourseService {
     private CourseMapper courseMapper;
 
     @Autowired
+    public CourseMapperCustom courseMapperCustom;
+
+    @Autowired
     private StudentCourseMapper studentCourseMapper;
     /**
      * 所有课程
      * @return
      */
     @Override
-    public List<Course> getCourse() {
-        CourseExample courseExample = new CourseExample();
-        CourseExample.Criteria criteria = courseExample.createCriteria();
-        List<Course> course = courseMapper.selectByExample(courseExample);
-        return course;
+    public PagingVo getCourse(EasyUIPagination easyUIPagination) {
+//        CourseExample courseExample = new CourseExample();
+//        CourseExample.Criteria criteria = courseExample.createCriteria();
+//        List<Course> course = courseMapper.selectByExample(courseExample);
+        List<Course> course = courseMapperCustom.findAllByPaging(easyUIPagination);
+        PagingVo pagingVo = new PagingVo();
+        int rows = courseMapperCustom.findAllRows();
+        pagingVo.setTotal(rows);
+        pagingVo.setRows(course);
+        return pagingVo;
+    }
+
+    @Override
+    public int findRows() {
+        return courseMapperCustom.findAllRows();
+    }
+
+    /***
+     * 分页查询某个老师所开设的课程
+     */
+    @Override
+    public List<Course> getByTid(Integer tid) {
+        Map map = new HashMap<>();
+        map.put("tid",tid);
+
+        courseMapperCustom.findByPaging(map);
+        return null;
     }
 
     /**
@@ -95,6 +120,26 @@ public class CourseService implements ICourseService {
 
         return notSelCourse;
 
+    }
+
+
+
+    @Override
+    public boolean addCourse(Course course) {
+        int re = courseMapper.insert(course);
+        return re > 0;
+    }
+
+    @Override
+    public boolean updateCourse(Course course) {
+        int re = courseMapper.updateByPrimaryKey(course);
+        return re > 0;
+    }
+
+    @Override
+    public boolean deleteCourse(Integer cid) {
+        int re = courseMapper.deleteByPrimaryKey(cid);
+        return re > 0;
     }
 
 //    public static void main(String[] args) {

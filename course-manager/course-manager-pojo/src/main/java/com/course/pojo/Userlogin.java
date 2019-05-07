@@ -222,4 +222,16 @@ public class Userlogin {
     public String getCredentialsSalt() {
         return username + salt;
     }
+
+    @Override
+    public String toString() {
+        return "Userlogin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userid=" + userid +
+                ", role=" + role +
+                ", salt='" + salt + '\'' +
+                '}';
+    }
 }

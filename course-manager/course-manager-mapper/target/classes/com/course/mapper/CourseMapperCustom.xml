@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.mapper.CourseMapperCustom">
+
+
+
+    <select id="findAllByPaging" resultType="course" parameterType="com.common.pojo.EasyUIPagination">
+      select cid,
+      courseName,
+      message,
+      beginTime,
+      endTime,
+      credit,
+      category,
+      departmentID
+      from course
+      limit #{begin},#{rows}
+
+    </select>
+
+
+    <select id="findAllRows" resultType="int">
+        select count(cid) from course
+
+    </select>
+
+
+
+
+
+</mapper>

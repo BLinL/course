@@ -1,6 +1,7 @@
 com\course\mapper\StudentPrivilegeMapper.class
 com\course\mapper\StudentMapper.class
 com\course\mapper\AdminMapper.class
+com\course\mapper\CourseMapperCustom.class
 com\course\mapper\CourseMapper.class
 com\course\mapper\UserloginMapper.class
 com\course\mapper\TeacherMapper.class

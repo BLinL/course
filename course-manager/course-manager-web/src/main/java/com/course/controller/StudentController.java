@@ -1,9 +1,11 @@
 package com.course.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.course.pojo.ReturnMessage;
 import com.course.pojo.Student;
 import com.course.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,5 +40,14 @@ public class StudentController {
     {
 
         System.out.println("showCourse");
+    }
+
+    @RequestMapping(value="selCourse")
+    @ResponseBody
+    public String selectCourse(String cid){
+        System.out.println(cid);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("res","ok");
+        return jsonObject.toJSONString();
     }
 }

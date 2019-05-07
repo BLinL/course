@@ -1,25 +1,31 @@
 package com.course.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.course.pojo.Course;
+import com.course.pojo.PagingVo;
 import com.course.pojo.Student;
+import com.course.pojo.Userlogin;
 import com.course.service.ICourseService;
 import com.course.service.IStudentService;
+import com.course.service.impl.LoginService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.common.pojo.EasyUIPagination;
 
-import javax.servlet.http.HttpSession;
-import java.security.Security;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
+@RequestMapping("course")
 public class CourseController {
 
     @Autowired
@@ -28,15 +34,23 @@ public class CourseController {
     @Autowired
     private IStudentService studentService;
 
+    @Autowired
+    private LoginService loginService;
 
     @RequestMapping(value = "getdata",produces = "text/html;charset=utf-8")
     @ResponseBody
-    public String getData(){
+    public String getData(EasyUIPagination easyUIPagination){
+        int rows = easyUIPagination.getRows();
+        int page = easyUIPagination.getPage();
+
+        int begin = (page-1) * rows;
+        easyUIPagination.setBegin(begin);
         ObjectMapper objectMapper = new ObjectMapper();
         //Jackson 默认是转成timestamps形式的,需要自己格式化
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         objectMapper.setDateFormat(simpleDateFormat);
-        List<Course> course = courseService.getCourse();
+//        List<Course> course = courseService.getCourse();
+        PagingVo course = courseService.getCourse(easyUIPagination);
         String courseJson = "";
         try {
             courseJson = objectMapper.writeValueAsString(course);
@@ -80,5 +94,69 @@ public class CourseController {
 
         System.out.println(selCourseJson);
         return selCourseJson;
+    }
+
+
+    @RequestMapping(value = "addCourse",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String addCourse(Course course){
+//        Subject subject = SecurityUtils.getSubject();
+//        Object principle = subject.getPrincipal();
+//        Userlogin curUser = loginService.findByName((String) principle);
+//        course.setCid(curUser.getUserid());
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession(false);
+        Userlogin curUser = null;
+        if(session!=null){
+            curUser = (Userlogin)session.getAttribute("currUser");
+        }
+        if(curUser!=null){
+            course.setTid(curUser.getUserid());
+        }
+        System.out.println(course);
+        JSONObject jsonObject = new JSONObject();
+        boolean result = courseService.addCourse(course);
+
+        if(result){
+            jsonObject.put("res","ok");
+        }else{
+            jsonObject.put("res","false");
+        }
+
+        return jsonObject.toJSONString();
+
+    }
+
+    @RequestMapping(value = "delCourse",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String delCourse(Integer cid){
+        JSONObject jsonObject = new JSONObject();
+        boolean result = courseService.deleteCourse(cid);
+
+        if(result){
+            jsonObject.put("res","ok");
+        }else{
+            jsonObject.put("res","删除失败");
+        }
+
+        return jsonObject.toJSONString();
+
+    }
+
+
+    @RequestMapping(value = "updateCourse",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String updateCourse(Course course){
+        JSONObject jsonObject = new JSONObject();
+        boolean result = courseService.addCourse(course);
+
+        if(result){
+            jsonObject.put("res","ok");
+        }else{
+            jsonObject.put("res","修改失败");
+        }
+
+        return jsonObject.toJSONString();
+
     }
 }

@@ -44,13 +44,13 @@
             </dependency>
 
 
-            <!-- https://mvnrepository.com/artifact/junit/junit -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit-version}</version>
                 <scope>test</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
 
             <!--mybatis 依赖-->
             <dependency>
