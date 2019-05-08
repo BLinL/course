@@ -35,7 +35,7 @@
                 <th data-options="field:'category',width:100">课程分类          </th>
                 <th data-options="field:'departmentid',width:100">开设院系      </th>
                 <th data-options="field:'credit',width:100">学分                </th>
-                <a id="btn" href="javascript:(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'">选择</a>
+                <a id="btn-save" href="javascript:(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'">选择</a>
 
             </tr>
         </thead>
@@ -43,14 +43,16 @@
     </table>
 
     <script type="text/javascript">
+
         var select;
        $("#dg").datagrid({
            onClickRow:function (rowIndex, rowData) {
-                select = rowData.cid;
+               select = rowData.cid;
+               // alert(select);
            }
        });
 
-       $("#btn").click(function () {
+       $("#btn-save").click(function () {
            $.ajax({
                type:'post',
                async:true,
@@ -68,6 +70,7 @@
                }
            });
        });
+
 
     </script>
 </div>

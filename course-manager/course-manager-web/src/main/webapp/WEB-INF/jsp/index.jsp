@@ -19,8 +19,7 @@
 <body class="easyui-layout">
 
 
-
-        <div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
+<div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
             <%--学生菜单--%>
             <shiro:hasRole name="student">
                 <ul id="tt" class="easyui-tree">
@@ -70,13 +69,14 @@
 
         </div>
 
-        <div data-options="region:'south',title:'South Title',split:true" style="height:100px;">
-
+        <div data-options="region:'south',title:'信息',split:true" style="height:100px;">
+            <shiro:user>
+                欢迎[<shiro:principal/>]登录，<a href="${pageContext.request.contextPath}/logout">退出</a>
+            </shiro:user>
         </div>
 
 
         <script type="text/javascript">
-
             $('#tt').tree({
                 onClick: function(node){
                     var node_text = node.text;
@@ -89,6 +89,8 @@
 
                         if(tab){
                             tabs.tabs("select",node_text);
+                            //var tab = tabs.tabs('getSelected');
+
                         }else{
                             // 添加一个新的标签页面板（tab panel）
                             tabs.tabs('add',{
@@ -128,9 +130,30 @@
                        }
                    }
                 }
+            });
 
+            $("#adm").tree({
+                onClick:function (node) {
+                    var node_text = node.text;
 
+                    if(node_text === "课程管理") {
 
+                    } else {
+                        var tabs = $("#tb");
+                        var tab = tabs.tabs("getTab",node_text);
+                        if(tab){
+                            tabs.tabs("select",node_text)
+                        }else{
+                            // 添加一个新的标签页面板（tab panel）
+                            tabs.tabs('add',{
+                                title:node_text,
+                                content:'Tab Body',
+                                closable:true,
+                                href:node.attributes.url
+                            });
+                        }
+                    }
+                }
             })
 
         </script>

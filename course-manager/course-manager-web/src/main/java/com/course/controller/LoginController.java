@@ -70,4 +70,15 @@ public class LoginController {
         return jsonObject.toJSONString();
     }
 
+    /**
+     * 登出
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "redirect:login";
+    }
+
 }

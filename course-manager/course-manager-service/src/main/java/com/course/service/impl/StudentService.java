@@ -1,16 +1,16 @@
 package com.course.service.impl;
 
+import com.course.mapper.StudentCourseMapper;
 import com.course.mapper.StudentMapper;
 import com.course.mapper.UserloginMapper;
-import com.course.pojo.Student;
-import com.course.pojo.StudentExample;
-import com.course.pojo.Userlogin;
+import com.course.pojo.*;
 import com.course.service.IStudentService;
 import com.course.utils.PasswordUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -22,6 +22,9 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private UserloginMapper userloginMapper;
+
+    @Autowired
+    private StudentCourseMapper studentCourseMapper;
 
 
     /**
@@ -79,6 +82,22 @@ public class StudentService implements IStudentService {
         criteria.andUsernameLike(username);
         List<Student> student = studentMapper.selectByExample(studentExample);
         return student == null?null:student.get(0);
+    }
+
+    @Override
+    public boolean addCourse(StudentCourse studentCourse) throws SQLException {
+        int res = studentCourseMapper.insert(studentCourse);
+        return res > 0;
+    }
+
+    @Override
+    public boolean deleteCourse(StudentCourse studentCourse) throws SQLException {
+        StudentCourseExample studentCourseExample = new StudentCourseExample();
+        StudentCourseExample.Criteria critera = studentCourseExample.createCriteria();
+        critera.andStudentidEqualTo(studentCourse.getStudentid());
+        critera.andCourseidEqualTo(studentCourse.getCourseid());
+        int res = studentCourseMapper.deleteByExample(studentCourseExample);
+        return res > 0;
     }
 
 //    public static void main(String[] args) {
