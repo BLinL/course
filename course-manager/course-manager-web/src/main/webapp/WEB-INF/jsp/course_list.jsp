@@ -16,12 +16,11 @@
 </head>
 <body>
 <div style="margin: 0 10px">
-    <h2>Here is all Course</h2>
+    <h2>所有课程</h2>
     <table id="dg" class="easyui-datagrid" title="All of course"
            style="margin: 10px 10px"
            data-options="url:'course/getdata',fitColumns:true,singleSelect:true,method:'get'"
            rownumbers="true" fitColumns="true" pagination="true">
-
         <thead>
             <tr>
 
@@ -62,9 +61,9 @@
                success(data){
                    var data1 = eval('(' + data + ')');
                    $.messager.show({
-                       title:'添加成功',
+                       title:'提示',
                        msg:'message:'+data1.res,
-                       timeout:5000,
+                       timeout:3000,
                        showType:'slide'
                    });
                }

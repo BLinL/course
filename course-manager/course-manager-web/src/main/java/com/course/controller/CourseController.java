@@ -100,6 +100,7 @@ public class CourseController {
     @RequestMapping(value = "addCourse",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String addCourse(Course course){
+        System.out.println("添加课程："+course);
 //        Subject subject = SecurityUtils.getSubject();
 //        Object principle = subject.getPrincipal();
 //        Userlogin curUser = loginService.findByName((String) principle);
@@ -148,7 +149,7 @@ public class CourseController {
     @ResponseBody
     public String updateCourse(Course course){
         JSONObject jsonObject = new JSONObject();
-        boolean result = courseService.addCourse(course);
+        boolean result = courseService.updateCourse(course);
 
         if(result){
             jsonObject.put("res","ok");
@@ -157,6 +158,51 @@ public class CourseController {
         }
 
         return jsonObject.toJSONString();
+
+    }
+
+
+    @RequestMapping(value = "updateCourseStatus",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String setPassCourse(Integer cid){
+        System.out.println("更改课程："+cid);
+        JSONObject jsonObject = new JSONObject();
+        boolean result = courseService.agreeCourse(cid);
+        if(result){
+            jsonObject.put("res","修改成功");
+        }else{
+            jsonObject.put("res","修改失败");
+        }
+
+        return jsonObject.toJSONString();
+
+    }
+
+
+    /**
+     * 获取未审核课程 status = 0
+     * @param easyUIPagination
+     * @return
+     */
+    @RequestMapping(value = "getUnPassedCourse",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String getUnPassedCourse(EasyUIPagination easyUIPagination){
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        objectMapper.setDateFormat(simpleDateFormat);
+        String selCourseJson = "";
+        int rows = easyUIPagination.getRows();
+        int page = easyUIPagination.getPage();
+        int begin = (page-1) * rows;
+        easyUIPagination.setBegin(begin);
+        PagingVo pagingVo = courseService.getCourseUnChecked(easyUIPagination);
+
+        try {
+            selCourseJson = objectMapper.writeValueAsString(pagingVo);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return selCourseJson;
 
     }
 }

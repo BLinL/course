@@ -11,10 +11,10 @@
     <title>已选课程</title>
 </head>
 <body>
+<div style="margin: 10px;">
 <h2>学生选课</h2>
 <%--不同页面id 不要取相同--%>
 <table id="dg1" class="easyui-datagrid" title="我的课程"
-       style="margin: 10px 10px"
        data-options="url:'course/getSelectedCourse',fitColumns:true,singleSelect:true,method:'get'">
 
     <thead>
@@ -56,9 +56,9 @@
             success(data){
                 var data1 = eval('(' + data + ')');
                 $.messager.show({
-                    title:'添加成功',
+                    title:'提示',
                     msg:'message:'+data1.res,
-                    timeout:5000,
+                    timeout:3000,
                     showType:'slide'
                 });
             }
@@ -66,5 +66,6 @@
     });
 
 </script>
+</div>
 </body>
 </html>

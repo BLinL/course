@@ -17,7 +17,7 @@
 </head>
 
 <body class="easyui-layout">
-
+<shiro:authenticated>
 
 <div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
             <%--学生菜单--%>
@@ -41,7 +41,7 @@
                         <span>课程管理</span>
                         <ul>
                             <li data-options="attributes:{'url':'course_add'}"><span>课程添加</span></li>
-                            <li data-options="attributes:{'url':'course_add'}"><span>成绩管理</span></li>
+                            <li data-options="attributes:{'url':'score_list'}"><span>成绩管理</span></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,8 +52,14 @@
                     <li>
                         <span>课程管理</span>
                         <ul>
-                            <li data-options="attributes:{'url':'course_list'}"><span>课程审核</span></li>
-                            <li data-options="attributes:{'url':'select_course'}"><span>学生管理</span></li>
+                            <li data-options="attributes:{'url':'course_check'}"><span>课程审核</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span>公告管理</span>
+                        <ul>
+                            <li data-options="attributes:{'url':'publish_nitice'}"><span>发布公告</span></li>
+                            <li data-options="attributes:{'url':'notice_list'}"><span>公告管理</span></li>
                         </ul>
                     </li>
                 </ul>
@@ -69,7 +75,7 @@
 
         </div>
 
-        <div data-options="region:'south',title:'信息',split:true" style="height:100px;">
+        <div id="ss" data-options="region:'south',title:'信息',split:true" style="height:100px;">
             <shiro:user>
                 欢迎[<shiro:principal/>]登录，<a href="${pageContext.request.contextPath}/logout">退出</a>
             </shiro:user>
@@ -77,6 +83,21 @@
 
 
         <script type="text/javascript">
+            //页面加载后加载notice
+            $(function () {
+                $.ajax({
+                    type: 'get',
+                    async: true,
+                    url: 'notice/getNotice',
+                    dataType: 'text',//服务器返回类型，如果是json，则直接返回为一个对象，不用再转换
+                    success(data) {
+                        var data1 = eval('(' + data + ')');
+                        var gg = "<p>公告："+data1.content+"</p>";
+                        $("#ss").append(gg);
+                    }
+                });
+            });
+
             $('#tt').tree({
                 onClick: function(node){
                     var node_text = node.text;
@@ -157,5 +178,9 @@
             })
 
         </script>
+    </shiro:authenticated>
+    <shiro:notAuthenticated>
+        <a href="index.jsp" class="easyui-button">button</a>
+    </shiro:notAuthenticated>
 </body>
 </html>

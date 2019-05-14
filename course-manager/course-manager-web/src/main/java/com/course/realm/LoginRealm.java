@@ -103,7 +103,7 @@ public class LoginRealm extends AuthorizingRealm {
         //从数据库取出用户数据,作为认证实体
         Userlogin userlogin = loginService.findByName(username);
 
-        System.out.println(userlogin);
+        System.out.println("数据库:"+userlogin);
         if(userlogin == null){
             throw new UnknownAccountException("username not found");
         }

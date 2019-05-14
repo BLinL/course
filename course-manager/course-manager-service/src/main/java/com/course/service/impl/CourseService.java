@@ -4,6 +4,7 @@ import com.common.pojo.EasyUIPagination;
 import com.course.mapper.CourseMapper;
 import com.course.mapper.CourseMapperCustom;
 import com.course.mapper.StudentCourseMapper;
+import com.course.mapper.UserloginMapper;
 import com.course.pojo.*;
 import com.course.service.ICourseService;
 import com.course.utils.PasswordUtil;
@@ -58,6 +59,41 @@ public class CourseService implements ICourseService {
 
         courseMapperCustom.findByPaging(map);
         return null;
+    }
+
+    /**
+     * 改变课程为 已审核
+     * @param
+     * @return
+     */
+    @Override
+    public boolean agreeCourse(Integer courseId) {
+        Course course = courseMapper.selectByPrimaryKey(courseId);
+        course.setStatus(0);
+        int res = courseMapper.updateByPrimaryKey(course);
+        return res>0;
+    }
+
+    @Override
+    public boolean disagreeCourse(Integer courseId) {
+        Course course = courseMapper.selectByPrimaryKey(courseId);
+        course.setStatus(1);
+        int res = courseMapper.updateByPrimaryKey(course);
+        return res>0;
+    }
+    /**
+     * 获取未审核课程
+     * @param easyUIPagination
+     * @return
+     */
+    @Override
+    public PagingVo getCourseUnChecked(EasyUIPagination easyUIPagination) {
+        List<Course> course = courseMapperCustom.findUncheckCourse(easyUIPagination);
+        PagingVo pagingVo = new PagingVo();
+        int rows = courseMapperCustom.findUncheckCourseRows();
+        pagingVo.setTotal(rows);
+        pagingVo.setRows(course);
+        return pagingVo;
     }
 
     /**
@@ -142,8 +178,8 @@ public class CourseService implements ICourseService {
         return re > 0;
     }
 
-//    public static void main(String[] args) {
-//        PasswordUtil passwordUtil = new PasswordUtil();
-//        passwordUtil.encryptPassword(new Userlogin("罗宾","123"));
-//    }
+    public static void main(String[] args) {
+        PasswordUtil passwordUtil = new PasswordUtil();
+        passwordUtil.encryptPassword(new Userlogin("admin","123"));
+    }
 }

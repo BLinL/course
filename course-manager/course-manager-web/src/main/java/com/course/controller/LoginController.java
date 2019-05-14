@@ -22,24 +22,17 @@ import java.util.List;
 
 @Controller
 public class LoginController {
-
-
-
     @RequestMapping(value = "/logon",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String login(Userlogin userlogin){
         JSONObject jsonObject = new JSONObject();
-
         System.out.println(userlogin);
         //当前subject
         Subject subject = SecurityUtils.getSubject();//Sbuject的实例通常是DelegatingSubject类
-
-
         if(!subject.isAuthenticated()){
             //shiro登录
             UsernamePasswordToken token =new UsernamePasswordToken(
                     userlogin.getUsername(),userlogin.getPassword());
-
             try {
                 subject.login(token);
             }catch (UnknownAccountException unknownAccountEx){

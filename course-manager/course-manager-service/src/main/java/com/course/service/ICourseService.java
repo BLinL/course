@@ -22,6 +22,15 @@ public interface ICourseService {
     //查询某个老师所开设的课程
     public List<Course> getByTid(Integer tid);
 
+    //审核通过课程
+    public boolean agreeCourse(Integer courseId);
+
+    //撤销审核通过课程
+    public boolean disagreeCourse(Integer courseId);
+
+    //获取未审核的课程
+    public PagingVo getCourseUnChecked(EasyUIPagination easyUIPagination);
+
 
 
 

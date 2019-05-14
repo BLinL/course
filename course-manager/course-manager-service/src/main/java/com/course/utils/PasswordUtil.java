@@ -8,17 +8,14 @@ import org.apache.shiro.util.ByteSource;
 
 public class PasswordUtil {
     private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
-
     private String algorithmName = "md5";
     private int hashIterations = 2;
-
     public void setAlgorithmName(String algorithmName) {
         this.algorithmName = algorithmName;
     }
     public void setHashIterations(int hashIterations) {
         this.hashIterations = hashIterations;
     }
-
     /**
      * 密码加密
      */
@@ -34,4 +31,5 @@ public class PasswordUtil {
         System.out.println("------"+password);
         user.setPassword(password);
     }
+
 }

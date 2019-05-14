@@ -16,8 +16,8 @@ public interface IStudentService{
 
     Student findByUsername(String username);
 
-    boolean addCourse(StudentCourse studentCourse) throws SQLException;
+    boolean addCourse(StudentCourse studentCourse);
 
-    boolean deleteCourse(StudentCourse studentCourse) throws SQLException;
+    boolean deleteCourse(StudentCourse studentCourse);
 
 }

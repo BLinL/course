@@ -37,11 +37,16 @@
         </thead>
     </table>
 
+    <script type="text/javascript">
+        // var row = $('#dg').datagrid('getSelected');
+        // alert(row)
+    </script>
+
 </div>
 
 
 <%--模态框--%>
-<div id="dlg" class="easyui-dialog" title="添加课程" style="width:500px;height:400px;"
+<div id="dlg" class="easyui-dialog" title="添加课程" style="width:500px;height:430px;"
      data-options="iconCls:'icon-save',resizable:false,modal:true,closed:true,border:'thin',buttons:'#dlg-buttons'">
     <form id="ff" method="post" style="margin:0;padding:20px 50px">
         <div style="margin-bottom: 10px">
@@ -59,6 +64,9 @@
 
         <div style="margin-bottom: 10px">
             <input class="easyui-textbox" type="text" name="category" data-options="required:true" label="课程分类:" style="width: 100%"/>
+        </div>
+        <div style="margin-bottom: 10px">
+            <input class="easyui-textbox" type="text" name="credit" data-options="required:true" label="学分:" style="width: 100%"/>
         </div>
         <div style="margin-bottom: 10px">
             <input class="easyui-textbox" type="text" name="departmentid" data-options="required:true" label="开设院系:" style="width: 100%"/>
@@ -108,6 +116,7 @@
 <script type="text/javascript">
 
 
+
     function saveUser() {
         $('#ff').form({
             url:'course/addCourse',
@@ -120,9 +129,9 @@
                 alert(data)
                 var data1 = eval('(' + data + ')');
                 $.messager.show({
-                    title:'添加成功',
+                    title:'提示',
                     msg:'message:'+data1.res,
-                    timeout:5000,
+                    timeout:3000,
                     showType:'slide'
                 });
                 $("#dlg").dialog('close')
@@ -154,6 +163,7 @@
         iconCls:'icon-save',
         handler:function(){alert('save')}
     }];
+
 </script>
 </div>
 </body>

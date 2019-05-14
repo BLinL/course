@@ -7,6 +7,10 @@ import com.course.pojo.*;
 import com.course.service.IStudentService;
 import com.course.utils.PasswordUtil;
 
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +44,9 @@ public class StudentService implements IStudentService {
 
         Userlogin userlogin = new Userlogin(student.getUsername(),student.getPassword());
 
+        //设置学生权限
+        userlogin.setRole(1);
+        userlogin.setUserid(student.getSid());
         PasswordUtil passwordUtil = new PasswordUtil();
         //密码MD5加密
         passwordUtil.encryptPassword(userlogin);
@@ -85,13 +92,13 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public boolean addCourse(StudentCourse studentCourse) throws SQLException {
+    public boolean addCourse(StudentCourse studentCourse) {
         int res = studentCourseMapper.insert(studentCourse);
         return res > 0;
     }
 
     @Override
-    public boolean deleteCourse(StudentCourse studentCourse) throws SQLException {
+    public boolean deleteCourse(StudentCourse studentCourse) {
         StudentCourseExample studentCourseExample = new StudentCourseExample();
         StudentCourseExample.Criteria critera = studentCourseExample.createCriteria();
         critera.andStudentidEqualTo(studentCourse.getStudentid());
@@ -99,14 +106,5 @@ public class StudentService implements IStudentService {
         int res = studentCourseMapper.deleteByExample(studentCourseExample);
         return res > 0;
     }
-
-//    public static void main(String[] args) {
-//        String hashAlgorithmName = "MD5";
-//        String password = "123";
-//        Object salt = ByteSource.Util.bytes("张三");
-//        int hashIterations = 1024;
-//        SimpleHash res = new SimpleHash(hashAlgorithmName, password, salt, hashIterations);
-//        System.out.println(res);
-//    }
 }
 

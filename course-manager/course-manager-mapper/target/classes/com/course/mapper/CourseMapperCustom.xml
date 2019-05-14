@@ -14,6 +14,7 @@
       category,
       departmentID
       from course
+      where status = 0
       limit #{begin},#{rows}
 
     </select>
@@ -21,11 +22,26 @@
 
     <select id="findAllRows" resultType="int">
         select count(cid) from course
-
     </select>
 
 
+    <select id="findUncheckCourse" resultType="course" parameterType="com.common.pojo.EasyUIPagination">
+      select cid,
+      courseName,
+      message,
+      beginTime,
+      endTime,
+      credit,
+      category,
+      departmentID
+      from course
+      where status = 1
+      limit #{begin},#{rows}
+    </select>
 
+    <select id="findUncheckCourseRows" resultType="int">
+        select count(cid) from course where status = 1
+    </select>
 
 
 </mapper>

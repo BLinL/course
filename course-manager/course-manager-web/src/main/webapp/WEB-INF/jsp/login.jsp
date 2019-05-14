@@ -20,7 +20,7 @@
 <%--<%@include file="head.jsp"%>--%>
 <div id="header" class="group wrap header">
 
-    <div style="margin:70px auto;width: 40%;">
+    <div style="margin:70px auto;width: 550px;">
         <div class="easyui-tabs" style="height:550px">
             <div title="登陆" style="padding:10px">
                 <div class="easyui-panel" style="padding:30px 60px;width:80%;border: 0;">
@@ -40,7 +40,6 @@
                     <div style="text-align:left;padding:5px">
                         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"
                            onclick="loding()">登陆</a>
-
                     </div>
 
                 </div>
@@ -75,8 +74,8 @@
             </script>
 
 
-            <div title="注册" style="padding:10px">
-                <div class="easyui-panel" style="padding:30px 60px;width:80%;border: 0">
+            <div title="注册">
+                <div class="easyui-panel" style="padding:20px 30px;width:80%;border: 0;margin: 0;">
                     <form id="ff" method="post">
                         <div style="margin-bottom:20px">
                             <div>学号:</div>
@@ -118,12 +117,9 @@
 
                     <script type="text/javascript">
                         function submitForm() {
-
                             $('#ff').form({
-
                                 url: 'student/addStudent',
                                 onSubmit: function () {
-
                                     return $(this).form('validate');
                                     // do some check
                                     // return false to prevent submit;
@@ -132,11 +128,8 @@
                                     alert(data);
                                 }
                             });
-
                             $('#ff').submit();
                         }
-
-
                         function clearForm() {
                             $('#ff').form('clear');
                         }
