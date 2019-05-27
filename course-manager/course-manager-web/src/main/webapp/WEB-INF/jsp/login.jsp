@@ -22,7 +22,7 @@
 
     <div style="margin:70px auto;width: 550px;">
         <div class="easyui-tabs" style="height:550px">
-            <div title="登陆" style="padding:10px">
+            <div title="登录" style="padding:10px">
                 <div class="easyui-panel" style="padding:30px 60px;width:80%;border: 0;">
                     <form id="logn" method="post">
                         <div style="margin-bottom:20px">
@@ -39,7 +39,7 @@
                     </form>
                     <div style="text-align:left;padding:5px">
                         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"
-                           onclick="loding()">登陆</a>
+                           onclick="loding()">登录</a>
                     </div>
 
                 </div>
