@@ -7,9 +7,9 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
 public class PasswordUtil {
-    private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
-    private String algorithmName = "md5";
-    private int hashIterations = 2;
+    private static RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
+    private static String algorithmName = "md5";
+    private static int hashIterations = 2;
     public void setAlgorithmName(String algorithmName) {
         this.algorithmName = algorithmName;
     }
@@ -19,7 +19,7 @@ public class PasswordUtil {
     /**
      * 密码加密
      */
-    public void encryptPassword(Userlogin user){
+    public static void encryptPassword(Userlogin user){
         user.setSalt(randomNumberGenerator.nextBytes().toHex());
 
         System.out.println("salt:"+user.getSalt());
@@ -30,6 +30,11 @@ public class PasswordUtil {
                 hashIterations).toHex();
         System.out.println("------"+password);
         user.setPassword(password);
+    }
+
+    public static void main(String[] args) {
+        Userlogin user = new Userlogin("li","123");
+        PasswordUtil.encryptPassword(user);
     }
 
 }

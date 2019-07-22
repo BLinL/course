@@ -51,6 +51,7 @@ public class CourseController {
         objectMapper.setDateFormat(simpleDateFormat);
 //        List<Course> course = courseService.getCourse();
         PagingVo course = courseService.getCourse(easyUIPagination);
+        System.out.println("course"+course);
         String courseJson = "";
         try {
             courseJson = objectMapper.writeValueAsString(course);

@@ -41,7 +41,7 @@ public class StudentController {
         //判断用户是否存在
         if(! studentService.findBySidAndUserName(student)){
             if(studentService.addStudent(student))
-                return new ReturnMessage("true","注册成功");
+                return new ReturnMessage("true","注册成功,请返回登陆页进行登陆");
         }
         return new ReturnMessage("false","注册失败，用户已存在");
     }

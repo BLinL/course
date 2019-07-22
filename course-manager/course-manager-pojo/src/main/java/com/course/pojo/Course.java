@@ -66,7 +66,7 @@ public class Course {
      *
      * @mbg.generated Tue May 07 01:00:07 CST 2019
      */
-    private Integer status = 1;
+    private Integer status = 1 ;
 
     /**
      *

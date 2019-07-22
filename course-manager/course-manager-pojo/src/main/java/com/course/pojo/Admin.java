@@ -1,5 +1,7 @@
 package com.course.pojo;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 public class Admin {
     /**
      *
@@ -99,4 +101,5 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
+  
 }

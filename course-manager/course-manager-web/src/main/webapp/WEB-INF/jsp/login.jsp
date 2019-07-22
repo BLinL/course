@@ -125,7 +125,10 @@
                                     // return false to prevent submit;
                                 },
                                 success: function (data) {
-                                    alert(data);
+                                    //dataType默认是text,需转为对象
+                                    var data1 = eval('(' + data + ')');
+                                    console.log('返回：'+JSON.parse(data));
+                                    alert(data1.message);
                                 }
                             });
                             $('#ff').submit();

@@ -2,6 +2,7 @@ com\course\controller\CourseController.class
 com\course\controller\LoginController.class
 com\course\controller\PageController.class
 com\course\controller\StudentController.class
+com\course\controller\IndexController.class
 com\course\controller\NoticeController.class
 com\course\realm\LoginRealm.class
 com\course\controller\StudentScoreController.class
