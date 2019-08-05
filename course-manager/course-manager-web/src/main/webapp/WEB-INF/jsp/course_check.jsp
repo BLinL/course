@@ -19,7 +19,7 @@
     <h2>待审核课程</h2>
     <table id="dg" class="easyui-datagrid" title="All of course"
            style="margin: 10px 10px"
-           data-options="url:'course/getUnPassedCourse',fitColumns:true,singleSelect:true,method:'get'"
+           data-options="url:'<%=request.getContextPath()%>/course/getUnPassedCourse',fitColumns:true,singleSelect:true,method:'get'"
            rownumbers="true" fitColumns="true" pagination="true">
         <thead>
         <tr>
@@ -47,6 +47,7 @@
         $("#dg").datagrid({
             onClickRow:function (rowIndex, rowData) {
                 select = rowData.cid;
+                alert(select);
             }
         });
 
@@ -55,7 +56,7 @@
                 type:'post',
                 async:true,
                 data:{'cid':select},
-                url:'course/updateCourseStatus',
+                url:'<%=request.getContextPath()%>/course/updateCourseStatus',
                 dataType:'text',//服务器返回类型，如果是json，则直接返回为一个对象，不用再转换
                 success(data){
                     var data1 = eval('(' + data + ')');

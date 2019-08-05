@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.course.pojo.Notice;
 import com.course.pojo.Userlogin;
-import com.course.service.impl.NoticeService;
+import com.course.service.INoticeServie;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("notice")
 public class NoticeController {
     @Autowired
-    private NoticeService noticeService;
+    private INoticeServie noticeService;
 
     @RequestMapping(value = "addNotice",produces = "text/html;charset=utf-8")
     @ResponseBody

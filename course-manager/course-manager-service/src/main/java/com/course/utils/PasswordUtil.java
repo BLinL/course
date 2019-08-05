@@ -33,7 +33,7 @@ public class PasswordUtil {
     }
 
     public static void main(String[] args) {
-        Userlogin user = new Userlogin("li","123");
+        Userlogin user = new Userlogin("admin","123");
         PasswordUtil.encryptPassword(user);
     }
 

@@ -88,7 +88,7 @@
                 $.ajax({
                     type: 'get',
                     async: true,
-                    url: 'notice/getNotice',
+                    url: '<%=request.getContextPath()%>/notice/getNotice',
                     dataType: 'text',//服务器返回类型，如果是json，则直接返回为一个对象，不用再转换
                     success(data) {
                         var data1 = eval('(' + data + ')');

@@ -1,9 +1,14 @@
 package com.common.pojo;
 
+/**
+ * page：页码，起始值 1。
+ * rows：每页显示行。
+ * @author bliu
+ */
 public class EasyUIPagination {
-    private int page;
-    private int rows;
-    private int begin;
+    private int page;//页码
+    private int rows;//每页条目数
+    private int begin;//查询起始
 
     public void setPage(int page) {
         this.page = page;

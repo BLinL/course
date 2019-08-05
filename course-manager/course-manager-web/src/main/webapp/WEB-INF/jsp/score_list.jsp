@@ -14,7 +14,7 @@
 <h2>学生成绩</h2>
     <table id="dgg" class="easyui-datagrid" title="All of course"
            style="margin: 10px 10px"
-           data-options="url:'score/getScore',fitColumns:true,singleSelect:true,method:'get'"
+           data-options="url:'<%=request.getContextPath()%>/score/getScore',fitColumns:true,singleSelect:true,method:'get'"
            rownumbers="true" fitColumns="true">
         <thead>
         <tr>
@@ -78,7 +78,7 @@
                 type: 'post',
                 async: true,
                 data: {'studentid': studentId,'courseid':courseId,'score':score},
-                url: 'score/updateScore',
+                url: '<%=request.getContextPath()%>/score/updateScore',
                 dataType: 'text',//服务器返回类型，如果是json，则直接返回为一个对象，不用再转换
                 success(data) {
                     $("#score").val("");

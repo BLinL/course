@@ -57,6 +57,7 @@
                         success: function (data) {
                             var data = eval('(' + data + ')');//转化为js 对象
                             var url = data.url;
+                            alert(url);
                             if (data.errorInfo == null) {
                                 //跳转
                                 window.location.href = "${pageContext.request.contextPath}" + url;

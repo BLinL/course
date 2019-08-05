@@ -2,12 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context.xsd
-      ">
+      http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <context:component-scan base-package="com.course"/>
+
+    <bean id="logAdvice" class="com.course.advice.LogAdvice"/>
+
+    <aop:config>
+       <aop:aspect id="as" ref="logAdvice">
+           <aop:pointcut id="pc1" expression="execution(* com.course.service..*.*(..))"/>
+           <aop:after-returning method="afterRerurningMethod" pointcut-ref="pc1"/>
+       </aop:aspect>
+    </aop:config>
 
 </beans>

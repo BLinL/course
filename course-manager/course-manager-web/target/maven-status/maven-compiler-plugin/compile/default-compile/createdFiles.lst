@@ -5,4 +5,5 @@ com\course\controller\StudentController.class
 com\course\controller\IndexController.class
 com\course\controller\NoticeController.class
 com\course\realm\LoginRealm.class
+com\course\advice\LogAdvice.class
 com\course\controller\StudentScoreController.class

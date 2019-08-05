@@ -1,3 +1,7 @@
 .idea
 *.log
-
+../course-manager/course-manager-mapper/target
+../course-manager/course-manager-pojo/target
+../course-manager/course-manager-service/target
+../course-manager/course-manager-web/target
+../course-portal/target

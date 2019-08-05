@@ -21,7 +21,7 @@
 <div>
 
     <table id="dg" class="easyui-datagrid" title="课程管理" style="height:390px"
-           data-options="singleSelect:true,collapsible:true,url:'course/getdata',method:'get',toolbar:toolbar" rownumbers="true" fitColumns="true" pagination="true">
+           data-options="singleSelect:true,collapsible:true,url:'<%=request.getContextPath()%>/course/getdata',method:'get',toolbar:toolbar" rownumbers="true" fitColumns="true" pagination="true">
         <thead>
         <tr>
             <th data-options="field:'ck',checkbox:true"></th>

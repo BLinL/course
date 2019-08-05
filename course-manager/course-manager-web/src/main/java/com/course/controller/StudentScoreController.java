@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.course.pojo.StudentCourse;
 import com.course.pojo.StudentCourse1;
 import com.course.pojo.Userlogin;
+import com.course.service.IStudentCoursService;
 import com.course.service.impl.StudentCourseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +23,7 @@ import java.util.List;
 public class StudentScoreController {
 
     @Autowired
-    private StudentCourseService studentCourseService;
+    private IStudentCoursService studentCourseService;
     //
     @RequestMapping(value = "getScore", produces = "text/html;charset=utf-8")
     @ResponseBody

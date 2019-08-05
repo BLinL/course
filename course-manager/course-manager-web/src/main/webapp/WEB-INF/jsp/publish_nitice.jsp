@@ -36,7 +36,7 @@
 <script>
     function submit(){
         $('#ff').form({
-            url:'notice/addNotice',
+            url:'<%=request.getContextPath()%>/notice/addNotice',
             onSubmit: function(){
                 return $(this).form('validate');
             },

@@ -11,6 +11,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class LoginController {
     @ResponseBody
     public String login(Userlogin userlogin){
         JSONObject jsonObject = new JSONObject();
-        System.out.println(userlogin);
+        System.out.println("userlogin:"+userlogin);
         //当前subject
         Subject subject = SecurityUtils.getSubject();//Sbuject的实例通常是DelegatingSubject类
         if(!subject.isAuthenticated()){

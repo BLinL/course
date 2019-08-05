@@ -14,7 +14,7 @@
 <h2>所有公告</h2>
 <table id="not" class="easyui-datagrid" title="公告"
        style="margin: 10px 10px"
-       data-options="url:'notice/getAllNotice',fitColumns:true,singleSelect:true,method:'get'"
+       data-options="url:'<%=request.getContextPath()%>/notice/getAllNotice',fitColumns:true,singleSelect:true,method:'get'"
        rownumbers="true" fitColumns="true">
     <thead>
     <tr>

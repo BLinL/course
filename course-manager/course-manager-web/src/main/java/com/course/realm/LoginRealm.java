@@ -4,6 +4,7 @@ import com.course.pojo.Privilege;
 import com.course.pojo.Role;
 import com.course.pojo.Userlogin;
 import com.course.service.ILoginService;
+import com.course.service.IPrivilegeService;
 import com.course.service.IRoleService;
 import com.course.service.impl.PrivilegeService;
 import org.apache.shiro.SecurityUtils;
@@ -40,7 +41,7 @@ public class LoginRealm extends AuthorizingRealm {
     private IRoleService roleService;
 
     @Autowired
-    private PrivilegeService privilegeService;
+    private IPrivilegeService privilegeService;
 
     /**
      * 授权

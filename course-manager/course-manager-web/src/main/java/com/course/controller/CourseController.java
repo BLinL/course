@@ -6,6 +6,7 @@ import com.course.pojo.PagingVo;
 import com.course.pojo.Student;
 import com.course.pojo.Userlogin;
 import com.course.service.ICourseService;
+import com.course.service.ILoginService;
 import com.course.service.IStudentService;
 import com.course.service.impl.LoginService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,11 +36,12 @@ public class CourseController {
     private IStudentService studentService;
 
     @Autowired
-    private LoginService loginService;
+    private ILoginService loginService;
 
     @RequestMapping(value = "getdata",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String getData(EasyUIPagination easyUIPagination){
+        System.out.println(easyUIPagination);
         int rows = easyUIPagination.getRows();
         int page = easyUIPagination.getPage();
 
@@ -77,7 +79,7 @@ public class CourseController {
         if(session!=null){
             String username = (String)session.getAttribute("username");
             //
-            System.out.println("--------------------courseController"+username);
+            //System.out.println("--------------------courseController"+username);
             if(username!=null){
                 Student stu = studentService.findByUsername(username);
                 Integer sid = stu.getSid();
@@ -93,7 +95,7 @@ public class CourseController {
 
         }
 
-        System.out.println(selCourseJson);
+        //System.out.println(selCourseJson);
         return selCourseJson;
     }
 
