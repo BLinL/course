@@ -25,7 +25,7 @@
         <mysql>5.1.40</mysql>
         <shrio-version>1.2.3</shrio-version>
         <servlet-version>2.5</servlet-version>
-        <jackon-version>2.9.8</jackon-version>
+        <jackon-version>2.9.10.8</jackon-version>
         <jstl-version>1.2</jstl-version>
         <logback-version>1.2.3</logback-version>
         <logback-sample-version>1.6.4</logback-sample-version>
